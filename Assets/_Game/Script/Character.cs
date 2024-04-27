@@ -13,9 +13,9 @@ public class Character : MonoBehaviour
     public float moveSpeed;
     [SerializeField] private Animator anim;
     protected string currentAnim;
-    protected bool isMoving = false;
+    public bool isMoving = false;
     protected bool canShoot = true;
-    protected bool isMovingDuring = false;
+    public bool isMovingDuring = false;
     public bool bulletAvailable = true;
 
     [SerializeField] public float radius;

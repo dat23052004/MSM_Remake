@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : Character
@@ -24,7 +25,7 @@ public class Player : Character
     {
         
     }
-    public void Moving()
+    private void Moving()
     {
         Vector3 movement = new Vector3(joystick.Horizontal, 0, joystick.Vertical);
         Vector3 velocity = movement * moveSpeed;
@@ -54,7 +55,7 @@ public class Player : Character
         }
     }
     
-    public void CheckSight()
+    private void CheckSight()
     {
         if (!isMoving)
         {
@@ -67,7 +68,7 @@ public class Player : Character
                 if (canShoot)
                 {
                     canShoot = false;                    
-                    StartCoroutine(ShootCoroutine(.2f));
+                    StartCoroutine(ShootCoroutine(0.2f));
                 }
             }
            
@@ -78,7 +79,7 @@ public class Player : Character
         }
     }
 
-    public bool CheckAnemy(out Vector3 position)
+    private bool CheckAnemy(out Vector3 position)
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
         position = Vector3.zero;        
@@ -94,17 +95,36 @@ public class Player : Character
         return false;
     }
 
-    public void Shoot(WeaponType weaponType)
+    private void Shoot(WeaponType weaponType)
     {
-        BulletBase bullet = SimplePool.Spawn<BulletBase>(GetTypeWeapon(weaponType),spawnBullet.position, transform.rotation);
+        BulletBase bullet = SimplePool.Spawn<BulletBase>(GetTypeWeapon(weaponType), spawnBullet.position, transform.rotation);
         bullet.DirectToBot = transform.forward;
         bullet.character = this;
         bulletAvailable = false;
-        StartCoroutine(DestroyBullet(bullet, radius));
-      
+
+        // Lấy vị trí ban đầu của đạn
+        Vector3 initialPosition = bullet.transform.position;
+
+        // Sử dụng coroutine để kiểm tra vị trí của đạn mỗi frame
+        StartCoroutine(CheckBulletDistance(bullet, initialPosition));
     }
 
-    public IEnumerator ShootCoroutine(float delay)
+    private IEnumerator CheckBulletDistance(BulletBase bullet, Vector3 initialPosition)
+    {
+        while (true)
+        {
+            if (Vector3.Distance(initialPosition, bullet.transform.position) > radius)
+            {
+                // Nếu khoảng cách lớn hơn radius, despawn đạn và kết thúc coroutine
+                bullet.OnDespawn();
+                bulletAvailable = true;
+                yield break; 
+            }
+
+            //yield return null; 
+        }
+    }
+    private IEnumerator ShootCoroutine(float delay)
     {
         yield return new WaitForSeconds(delay);
         if(bulletAvailable && !isMovingDuring)
@@ -117,17 +137,6 @@ public class Player : Character
         {
             canShoot = true;
         }
-    }
-
-    public IEnumerator DestroyBullet(BulletBase bullet, float maxDistance)
-    {
-        Vector3 initialPosition = bullet.transform.position;
-        while(Vector3.Distance(initialPosition, bullet.transform.position) < maxDistance)
-        {
-            yield return null;
-        }
-        bullet.OnDespawn();
-        bulletAvailable = true;
     }
     
     
