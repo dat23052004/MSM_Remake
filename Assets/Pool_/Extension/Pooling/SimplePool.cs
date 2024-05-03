@@ -1,21 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 
-public static class SimplePool 
+public static class SimplePool
 {
     private static Dictionary<PoolType, Pool> poolInstance = new Dictionary<PoolType, Pool>();
 
     // Khoi tao pool moi
     public static void Preload(GameUnit prefab, int amount, Transform parent)
     {
-        if(prefab == null)
+        if (prefab == null)
         {
-            Debug.LogError("PREFAB IS EMTY !!! "); 
+            Debug.LogError("PREFAB IS EMTY !!! ");
             return;
         }
 
-        if(!poolInstance.ContainsKey(prefab.PoolType) || poolInstance[prefab.PoolType] == null)
+        if (!poolInstance.ContainsKey(prefab.PoolType) || poolInstance[prefab.PoolType] == null)
         {
             Pool p = new Pool();
             p.Preload(prefab, amount, parent);
@@ -24,9 +25,9 @@ public static class SimplePool
     }
 
     // Lay phan tu ra
-    public static T Spawn<T>(PoolType poolType, Vector3 pos, Quaternion rot) where T : GameUnit
+    public static T Spawn<T>(PoolType poolType, UnityEngine.Vector3 pos, UnityEngine.Quaternion rot) where T : GameUnit
     {
-        if(!poolInstance.ContainsKey(poolType))
+        if (!poolInstance.ContainsKey(poolType))
         {
             Debug.LogError(poolType + "IS NOT PRELOAD !!! ");
             return null;
@@ -58,7 +59,7 @@ public static class SimplePool
     // thu thap tat ca
     public static void CollectAll()
     {
-        foreach(var item in poolInstance.Values)
+        foreach (var item in poolInstance.Values)
         {
             item.Collect();
         }
@@ -75,7 +76,7 @@ public static class SimplePool
     }
 
     // Destroy tat ca
-    public static  void ReleaseAll()
+    public static void ReleaseAll()
     {
         foreach (var item in poolInstance.Values)
         {
@@ -87,7 +88,7 @@ public static class SimplePool
 public class Pool
 {
     Transform parent;   // noi luu tru pool
-    GameUnit prefabs;   
+    GameUnit prefabs;
     Queue<GameUnit> inactives = new Queue<GameUnit>();  // chua cac unit dang o trong pool
     List<GameUnit> actives = new List<GameUnit>();   // cac unit dang duoc su dung
 
@@ -96,17 +97,17 @@ public class Pool
     {
         this.parent = parent;
         this.prefabs = prefabs;
-        for(int i = 0; i < mount; i++)
+        for (int i = 0; i < mount; i++)
         {
-            Despawn(Spawn(Vector3.zero, Quaternion.identity));
+            Despawn(Spawn(UnityEngine.Vector3.zero, UnityEngine.Quaternion.identity));
         }
     }
 
     //Lay phan ra tu pool
-    public GameUnit Spawn(Vector3 pos, Quaternion rot)
+    public GameUnit Spawn(UnityEngine.Vector3 pos, UnityEngine.Quaternion rot)
     {
         GameUnit unit;
-        if(inactives.Count <= 0)
+        if (inactives.Count <= 0)
         {
             unit = GameObject.Instantiate(prefabs, parent);
         }
@@ -123,7 +124,7 @@ public class Pool
     // tra phan tu ve pool
     public void Despawn(GameUnit unit)
     {
-        if(unit != null && unit.gameObject.activeSelf)
+        if (unit != null && unit.gameObject.activeSelf)
         {
             actives.Remove(unit);
             inactives.Enqueue(unit);
@@ -134,7 +135,7 @@ public class Pool
     // dua tat ca phan tu dnag dung ve pool
     public void Collect()
     {
-        while(actives.Count > 0)
+        while (actives.Count > 0)
         {
             Despawn(actives[0]);
         }
@@ -144,7 +145,7 @@ public class Pool
     public void Release()
     {
         Collect();
-        while(inactives.Count > 0)
+        while (inactives.Count > 0)
         {
             GameObject.Destroy(inactives.Dequeue().gameObject);
         }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -23,11 +24,12 @@ public class Bot : Character
         { 
             currentState.OnExecute(this);          
         }
-        CheckSight();
+        //CheckSight();
     }
 
     public override void OnInit()
     {
+        
         base.OnInit();
         ChangeState(new PatrolState());
     }
