@@ -116,6 +116,8 @@ public class Pool
             unit = inactives.Dequeue();
         }
         unit.TF.SetPositionAndRotation(pos, rot);
+        //unit.TF.position = pos;
+        //unit.TF.rotation = rot;
         actives.Add(unit);
         unit.gameObject.SetActive(true);
         return unit;

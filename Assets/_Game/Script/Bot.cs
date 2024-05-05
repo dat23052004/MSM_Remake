@@ -18,13 +18,14 @@ public class Bot : Character
     }
 
 
-    void Update()
+    public override void Update()
     {
+        base.Update();
         if(currentState != null)
         { 
             currentState.OnExecute(this);          
         }
-        //CheckSight();
+        CheckSight();
     }
 
     public override void OnInit()
@@ -78,17 +79,27 @@ public class Bot : Character
 
     private void Shoot(WeaponType weaponType)
     {
+        Debug.Log("Shoot");
         BulletBase bullet = SimplePool.Spawn<BulletBase>(GetTypeWeapon(weaponType), spawnBullet.position, transform.rotation);
+
         bullet.DirectToBot = transform.forward;
         bullet.character = this;
         bulletAvailable = false;
-        Vector3 initialPosition = bullet.transform.position; // Lấy vị trí ban đầu của đạn
-        if (Vector3.Distance(initialPosition, bullet.transform.position) > radius)
-        {
 
-            bullet.OnDespawn();
-            bulletAvailable = true;
+        // Sử dụng coroutine để kiểm tra vị trí của đạn mỗi frame
+        StartCoroutine(CheckBulletDistance(bullet));
+    }
+
+    private IEnumerator CheckBulletDistance(BulletBase bullet)
+    {
+
+        while (Vector3.Distance(spawnBullet.position, bullet.transform.position) < (radius - 1f))
+        {
+            yield return null;
         }
+        bullet.OnDespawn();
+
+        bulletAvailable = true;
     }
 
     private IEnumerator ShootCoroutine(float delaytime)

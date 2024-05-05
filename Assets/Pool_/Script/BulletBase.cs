@@ -29,7 +29,8 @@ public class BulletBase : GameUnit
     {
         if(other.CompareTag(Constant.CharacterTag) /*&& other.gameObject != character.gameObject*/)
         {
-            OnDespawn();           
+            OnDespawn();    
+            character.IncreaseSizeAndRadius();
             character.bulletAvailable = true;
         }
     }

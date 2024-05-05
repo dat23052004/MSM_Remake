@@ -18,12 +18,38 @@ public class Character : MonoBehaviour
     public bool isMovingDuring = false;
     public bool bulletAvailable = true;
 
-    [SerializeField] public float radius;
+    public int levelScaleAndRadius =0;
+    public Vector3 scaleFactor = new Vector3(1.01f, 1.01f, 1.01f);
+    public float radius;
     [SerializeField] protected Transform spawnBullet;
+
+    public virtual void Update()
+    {
+        
+        UpdateLevelCharacter(); 
+    }
     public virtual void OnInit()
     {
-
+        
     }
+    public void UpdateLevelCharacter()
+    {
+        Vector3 newScale = new Vector3(
+    Mathf.Pow(scaleFactor.x, levelScaleAndRadius),
+    Mathf.Pow(scaleFactor.y, levelScaleAndRadius),
+    Mathf.Pow(scaleFactor.z, levelScaleAndRadius)
+    );
+        Debug.Log(newScale);
+        transform.localScale = newScale;
+
+        radius = transform.localScale.x * 5f;
+    }
+
+    public void IncreaseSizeAndRadius()
+    {
+        levelScaleAndRadius++;
+    }
+
     protected PoolType GetTypeWeapon(WeaponType weaponType)
     {
         switch (weaponType)

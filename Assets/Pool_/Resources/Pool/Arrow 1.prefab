@@ -107,8 +107,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PoolType: 0
   rb: {fileID: 2534839340042309988}
-  speed: 10
+  speed: 7
   DirectToBot: {x: 0, y: 0, z: 0}
+  character: {fileID: 0}
 --- !u!114 &-198038358826628834
 MonoBehaviour:
   m_ObjectHideFlags: 0
