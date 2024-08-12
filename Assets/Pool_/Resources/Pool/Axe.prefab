@@ -9,14 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7808600962956936826}
-  - component: {fileID: 4762332409257778867}
   - component: {fileID: 6430333812608417893}
   - component: {fileID: 8193304409407023152}
   - component: {fileID: 6909166876873159553}
   - component: {fileID: -3372133985089130506}
   m_Layer: 0
   m_Name: Axe
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37,14 +36,6 @@ Transform:
   - {fileID: 4310694848849798239}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &4762332409257778867
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5226136646689515721}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!54 &6430333812608417893
 Rigidbody:
   m_ObjectHideFlags: 0

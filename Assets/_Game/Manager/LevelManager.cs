@@ -8,7 +8,7 @@ using UnityEngine;
 public class LevelManager : Singleton<LevelManager>
 {
     public Bot botPrefabs;
-    [SerializeField] private Player player;
+    [SerializeField] public Player player;
     [SerializeField] private LevelDataSO levelDataSO;
     [NonSerialized] public Level levelPrefabs;
     [NonSerialized] public List<Bot> botList = new List<Bot>();
@@ -76,14 +76,23 @@ public class LevelManager : Singleton<LevelManager>
     private void SpawnBotAtStart()
     {
         for (int i = 0; i < maxBotCount; i++)
-        {
+        {           
             SpawnBot();
         }
     }
     public void SpawnBot()
     {
+        
         Vector3 spawnpoint = pointList[UnityEngine.Random.Range(0, pointList.Count - 1)];       
         Bot bot = Instantiate(botPrefabs, spawnpoint, Quaternion.identity);
+        if(player.levelScaleAndRadius >= 3)
+        {
+            bot.levelScaleAndRadius = UnityEngine.Random.Range(player.levelScaleAndRadius - 3, player.levelScaleAndRadius + 3);
+        }
+        else 
+        {
+            bot.levelScaleAndRadius = UnityEngine.Random.Range(player.levelScaleAndRadius, player.levelScaleAndRadius + 2);
+        }
         bot.transform.parent = botContainer.transform;
         totalBotSpawn--;
         botList.Add(bot);
@@ -91,15 +100,22 @@ public class LevelManager : Singleton<LevelManager>
 
     private void CheckAndSpawnMoreBots()
     {
-        //if (botList.Count < maxBotCount && totalBotSpawn != 0)
-        //{
-        //    SpawnBot();
-        //}
-        //if (botList.Count == 0)
-        //{
-        //    Debug.Log("Finished Game!");
-        //    finishedLevel = true;
-            
-        //}
+        if (botList.Count < maxBotCount && totalBotSpawn != 0)
+        {
+            SpawnBot();
+        }
+        if (botList.Count == 0)
+        {
+            Debug.Log("Finished Game!");
+            finishedLevel = true;
+
+        }
+    }
+ 
+    public void DespawnBot(Bot bot)
+    {
+        
+        Destroy(bot.gameObject);
+        botList.Remove(bot);
     }
 }

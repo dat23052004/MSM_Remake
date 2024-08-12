@@ -1,13 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public enum WeaponType
-{
-    Arrow = 0,
-    Axe = 1,
-    Boomerang = 2
-}
 public class Character : MonoBehaviour
 {
     public float moveSpeed;
@@ -23,26 +18,35 @@ public class Character : MonoBehaviour
     public float radius;
     [SerializeField] protected Transform spawnBullet;
 
-    public virtual void Update()
+    [SerializeField] protected Transform weaponHoldingPos;
+    [SerializeField] protected WeaponInfo weaponData;
+    [SerializeField] protected PantDataSO pantData;
+    [SerializeField] protected HairDataSO hairData;
+    protected Weapon weaponInstance;
+
+    protected virtual void Update()
     {
-        
-        UpdateLevelCharacter(); 
+        UpdateLevelCharacter();
     }
     public virtual void OnInit()
     {
+        if (weaponData != null)
+        {
+            ChangeWeapon();
+        }
         
     }
     public void UpdateLevelCharacter()
     {
-        Vector3 newScale = new Vector3(
+                  Vector3 newScale = new Vector3(
     Mathf.Pow(scaleFactor.x, levelScaleAndRadius),
     Mathf.Pow(scaleFactor.y, levelScaleAndRadius),
     Mathf.Pow(scaleFactor.z, levelScaleAndRadius)
     );
-        Debug.Log(newScale);
+       
         transform.localScale = newScale;
-
-        radius = transform.localScale.x * 5f;
+        
+        radius = transform.localScale.x * 4f;
     }
 
     public void IncreaseSizeAndRadius()
@@ -65,6 +69,15 @@ public class Character : MonoBehaviour
         }
     }
 
+    public void ChangeWeapon()
+    {
+        weaponData = DataManager.Ins.GetWeaponData(GameManager.Ins.UserData.EquippedWeapon);
+        if (weaponInstance != null)
+        {
+            Destroy(weaponInstance.gameObject);
+        }
+        weaponInstance = Instantiate(weaponData.weapon, weaponHoldingPos.position, weaponHoldingPos.rotation, weaponHoldingPos);
+    }
     public void ChangeAnim(string animName)
     {
         if (currentAnim != animName)

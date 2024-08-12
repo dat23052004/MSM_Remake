@@ -20,8 +20,7 @@ public class BulletBase : GameUnit
     }
 
     public void OnDespawn()
-    {
-        
+    {       
         SimplePool.Despawn(this);
     }
 

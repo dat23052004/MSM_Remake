@@ -126,8 +126,14 @@ MonoBehaviour:
   isMoving: 0
   isMovingDuring: 0
   bulletAvailable: 1
+  levelScaleAndRadius: 0
+  scaleFactor: {x: 1.01, y: 1.01, z: 1.01}
   radius: 0
   spawnBullet: {fileID: 4561639323933868229}
+  weaponHoldingPos: {fileID: 1955985748168558510}
+  weaponData: {fileID: -3486557771679573856, guid: dbef700c70bc9f24d97b51c8b42f4ca7, type: 3}
+  pantData: {fileID: 0}
+  hairData: {fileID: 0}
   agent: {fileID: 7033033045381437753}
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointSet: 0
@@ -235,6 +241,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 5267049672850278442}
   m_SourcePrefab: {fileID: 100100000, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
+--- !u!4 &1955985748168558510 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8174010022519288266, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
+  m_PrefabInstance: {fileID: 1564186808853531032}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &4487182349756010488 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: -6057140222963153312, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}

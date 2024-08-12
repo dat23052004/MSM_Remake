@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9695ded8d065f6948a8fd5fd6d113e09, type: 3}
+  m_Name: PantSO
+  m_EditorClassIdentifier: 
+  listPants:
+  - {fileID: 966475871268718902, guid: 1add46beaa981de4a9f7dcd111ca769a, type: 3}
+  - {fileID: 7587588151021321732, guid: 33c3be179ad84294d9c0700fa8ec97a5, type: 3}
+  - {fileID: 2761128699556825449, guid: e60eb25f295a31b48bd27742cad7bd00, type: 3}
+  - {fileID: 4646329781895668318, guid: cf825f031bf1cc547a68452e10fd974b, type: 3}
+  - {fileID: 3720044822954566752, guid: 7176bdf18d0c60a449fad3aff42f938b, type: 3}
+  - {fileID: 7371164662733951624, guid: 1c5e04aa479742843a0abfe1e92f114c, type: 3}
+  - {fileID: 3147909625427121748, guid: 33b3f1895d47a254e9a70417d5470645, type: 3}
+  - {fileID: 1184481057697804450, guid: 14d798706bbfab342900992f8fc83ef6, type: 3}
+  - {fileID: 7636536616086353520, guid: d00f15f0b49cefa40a2de6d262437020, type: 3}

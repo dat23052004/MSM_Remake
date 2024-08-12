@@ -8,23 +8,24 @@ public class Player : Character
     [SerializeField] private Rigidbody rb;
     [SerializeField] private FloatingJoystick joystick;
     [SerializeField] private LayerMask groundLayer;    
-    private WeaponType currentWeapon = (WeaponType)2;
-    
+    private WeaponType currentWeapon = (WeaponType)0;
+
     void Start()
     {
         OnInit();
     }
-   
-    public override void  Update()
+
+    protected override void  Update()
     {
-        base.Update();     
+        base.Update();   
+        currentWeapon = weaponData.weaponType;
         Moving();
         CheckSight();
     }
 
     public override void OnInit()
     {
-        
+        base.OnInit();
     }
     private void Moving()
     {
@@ -99,7 +100,7 @@ public class Player : Character
 
     private void Shoot(WeaponType weaponType)
     {
-        Debug.Log("Shoot");
+        
         BulletBase bullet = SimplePool.Spawn<BulletBase>(GetTypeWeapon(weaponType), spawnBullet.position, transform.rotation);
 
         bullet.DirectToBot = transform.forward;
@@ -149,8 +150,17 @@ public class Player : Character
             canShoot = true;
         }
     }
-    
-    
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag(Constant.WeaponTag))
+        {
+            ChangeAnim(Constant.ANIM_DIE);
+           
+        }
+    }
+
+
     void OnDrawGizmos()
     {
         // Vẽ hình cầu để hiển thị vùng không gian

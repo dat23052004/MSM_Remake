@@ -12,5 +12,13 @@ public class Canvas_MainMenu : UICanvas
         Close(0);
     }
 
+    public void WeaponShopButton()
+    {
+        UIManager.Ins.OpenUI<Canvas_WeaponShop>();
+        GameManager.ChangeState(GameState.ShopWeapon);
+        Time.timeScale = 1f;
+        Close(0);
+    }
+
 
 }

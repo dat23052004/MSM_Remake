@@ -9,14 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2925988963707634976}
-  - component: {fileID: 4557956612789269499}
   - component: {fileID: 1154645862658270235}
   - component: {fileID: 2534839340042309988}
   - component: {fileID: 8216339085229046962}
   - component: {fileID: -198038358826628834}
   m_Layer: 0
-  m_Name: Arrow 1
-  m_TagString: Untagged
+  m_Name: Arrow
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37,14 +36,6 @@ Transform:
   - {fileID: 5862648105777965283}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &4557956612789269499
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3383864261145365475}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!65 &1154645862658270235
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -13,12 +13,12 @@ public class Bot : Character
     public float walkPointRange;   // Pham vi di chuyen 
     private WeaponType currentWeapon = WeaponType.Arrow;
     void Start()
-    {
+    {  
         OnInit();
     }
 
 
-    public override void Update()
+    protected override void Update()
     {
         base.Update();
         if(currentState != null)
@@ -79,7 +79,6 @@ public class Bot : Character
 
     private void Shoot(WeaponType weaponType)
     {
-        Debug.Log("Shoot");
         BulletBase bullet = SimplePool.Spawn<BulletBase>(GetTypeWeapon(weaponType), spawnBullet.position, transform.rotation);
 
         bullet.DirectToBot = transform.forward;
@@ -117,8 +116,19 @@ public class Bot : Character
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag(Constant.WeaponTag))
+        {
+            ChangeAnim(Constant.ANIM_DIE);           
+            Invoke(nameof(DespawnWithDelay), 1f);
+        }
+    }
 
-
+    private void DespawnWithDelay()
+    {
+        LevelManager.Ins.DespawnBot(this);
+    }
     public void ChangeState(IState<Bot> state)
     {
         if (currentState != null)
