@@ -11,11 +11,10 @@ public class DataManager : Singleton<DataManager>
 
     public WeaponInfo GetWeaponData(int weaponIndex)
     {
-        if (wpDataSO == null || wpDataSO.listWeapons == null || weaponIndex < 0 || weaponIndex >= wpDataSO.listWeapons.Count)
-        {
-            Debug.LogError("Invalid weaponIndex or wpDataSO not set");
-            return null;
-        }
+        //if (wpDataSO == null || wpDataSO.listWeapons == null || weaponIndex < 0 || weaponIndex >= wpDataSO.listWeapons.Count)
+        //{
+        //    return null;
+        //}
         return wpDataSO.listWeapons[weaponIndex];
     }
 

@@ -12,10 +12,10 @@ public class Player : Character
 
     void Start()
     {
-        OnInit();
+        base.OnInit();
     }
 
-    protected override void  Update()
+    protected override void Update()
     {
         base.Update();   
         currentWeapon = weaponData.weaponType;
@@ -25,7 +25,7 @@ public class Player : Character
 
     public override void OnInit()
     {
-        base.OnInit();
+        
     }
     private void Moving()
     {
@@ -36,8 +36,7 @@ public class Player : Character
         if(Physics.Raycast(raycastOrigin,Vector3.down, out hit, 5f, groundLayer))
         {
             rb.velocity = new Vector3(velocity.x, velocity.y, velocity.z);
-            isMoving = movement.magnitude > 0;   
-            
+            isMoving = movement.magnitude > 0;           
         }
         else
         {
@@ -102,7 +101,6 @@ public class Player : Character
     {
         
         BulletBase bullet = SimplePool.Spawn<BulletBase>(GetTypeWeapon(weaponType), spawnBullet.position, transform.rotation);
-
         bullet.DirectToBot = transform.forward;
         bullet.character = this;
         bulletAvailable = false;

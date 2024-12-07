@@ -185,17 +185,6 @@ MonoBehaviour:
   weaponDisplay: {fileID: 7524086205634969004}
   weaponDataSO: {fileID: 11400000, guid: 9a5b9aafdc3117343b8e946c959d24ae, type: 2}
   currentCoinLeft: {fileID: 7877093909837278674}
-  data:
-    equippedWeapon: 0
-    equippedHat: 1
-    equippedPant: 0
-    currentCoins: 10000
-    boughtWeapons: 00000000
-    boughtHats: 00000000
-    boughtPants: 00000000
-    boughtShields: 
-    boughtSets: 
-    username: Tien Dat
   price: {fileID: 106625652274728962}
   unequip: {fileID: 6051787097320823333}
   equip: {fileID: 8014262591493590205}

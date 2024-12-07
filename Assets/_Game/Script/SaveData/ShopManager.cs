@@ -4,16 +4,15 @@ using UnityEngine;
 
 public enum PantType
 {
-    Pant_0 = 0,
-    Pant_1 = 1,
-    Pant_2 = 2,
-    Pant_3 = 3,
-    Pant_4 = 4,
-    Pant_5 = 5,
-    Pant_6 = 6,
-    Pant_7 = 7,
-    Pant_8 = 8,
-    Pant_9 = 9
+    Pant_1 = 0,
+    Pant_2 = 1,
+    Pant_3 = 2,
+    Pant_4 = 3,
+    Pant_5 = 4,
+    Pant_6 = 5,
+    Pant_7 = 6,
+    Pant_8 = 7,
+    Pant_9 = 8
 }
 
 public enum HairType

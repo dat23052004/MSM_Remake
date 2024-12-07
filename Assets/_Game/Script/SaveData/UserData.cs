@@ -47,7 +47,7 @@ public class UserData
     public UserData()
     {
         EquippedWeapon = 0;
-        EquippedHat = 1;
+        EquippedHat = 0;
         EquippedPant = 0;
         CurrentCoins = 10000;
         BoughtWeapons.Add(0);

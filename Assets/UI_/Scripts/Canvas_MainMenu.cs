@@ -20,5 +20,11 @@ public class Canvas_MainMenu : UICanvas
         Close(0);
     }
 
-
+    public void ItemShopButton()
+    {
+        UIManager.Ins.OpenUI<Canvas_ItemShop>();
+        GameManager.ChangeState(GameState.ShopItem);
+        Time.timeScale = 1f;
+        Close(0);
+    }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WeaponInfo : MonoBehaviour
 {
-    public string name;
+    //public string name;
     public string bonus;
     public string description;
     public int price;

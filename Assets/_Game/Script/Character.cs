@@ -20,9 +20,14 @@ public class Character : MonoBehaviour
 
     [SerializeField] protected Transform weaponHoldingPos;
     [SerializeField] protected WeaponInfo weaponData;
-    [SerializeField] protected PantDataSO pantData;
-    [SerializeField] protected HairDataSO hairData;
+    [SerializeField] protected PantInfo pantData;
+    [SerializeField] protected HairInfo hairData;
+
     protected Weapon weaponInstance;
+    public SkinnedMeshRenderer pantInstance;
+    protected GameObject hairInstance; 
+
+    public Transform hairPos;
 
     protected virtual void Update()
     {
@@ -30,11 +35,15 @@ public class Character : MonoBehaviour
     }
     public virtual void OnInit()
     {
+    
         if (weaponData != null)
         {
             ChangeWeapon();
         }
-        
+        if(hairData != null)
+        {
+            ChangeHair();
+        }
     }
     public void UpdateLevelCharacter()
     {
@@ -69,14 +78,46 @@ public class Character : MonoBehaviour
         }
     }
 
+    
     public void ChangeWeapon()
-    {
+    {   
         weaponData = DataManager.Ins.GetWeaponData(GameManager.Ins.UserData.EquippedWeapon);
         if (weaponInstance != null)
         {
             Destroy(weaponInstance.gameObject);
         }
-        weaponInstance = Instantiate(weaponData.weapon, weaponHoldingPos.position, weaponHoldingPos.rotation, weaponHoldingPos);
+        weaponInstance = Instantiate(weaponData.weapon, weaponHoldingPos.position, weaponHoldingPos.rotation, weaponHoldingPos);  
+    }
+
+    public void TryHair(int index)
+    {
+        hairData = DataManager.Ins.hairDataSO.listHairs[index];
+        if(hairInstance != null)
+        {
+            Destroy(hairInstance.gameObject);
+        }
+        hairInstance = Instantiate(hairData.hairPrefab, hairPos.position, hairPos.rotation, hairPos);
+    }
+    public void ChangeHair()
+    {
+
+        hairData = DataManager.Ins.GetHatData(GameManager.Ins.UserData.EquippedHat);
+        if (hairInstance != null)
+        {
+            Destroy(hairInstance.gameObject);
+        }
+        hairInstance = Instantiate(hairData.hairPrefab, hairPos.position, hairPos.rotation, hairPos);
+    }
+    public void TryPant(int index)
+    {
+        Debug.Log("try");
+        pantData = DataManager.Ins.pantDataSO.listPants[index];
+        pantInstance.material = pantData.PantMaterial;
+    }
+    public void ChangePant()
+    {
+        pantData = DataManager.Ins.GetPantData(GameManager.Ins.UserData.EquippedPant);
+        pantInstance.material = pantData.PantMaterial;
     }
     public void ChangeAnim(string animName)
     {
